@@ -1,0 +1,149 @@
+.orders {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.togfil {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.toggle {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    margin: 20px 0 15px;
+}
+
+.toggle p {
+    padding: 15px 10px;
+    border-radius: 45px 45px 0 0;
+    border: 2px solid var(--secondary-color);
+    border-bottom: none;
+    font-weight: bold;
+    width: 25%;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.togfil .icon {
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.toggle p:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    margin: 1px 0;
+}
+
+.pagination span {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    font-size: 20px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.pagination span.active {
+    background-color: var(--main-color);
+}
+
+.pagination .arrow {
+    background-color: var(--secondary-color);
+}
+
+.pagination span .icon {
+    color: var(--main-color);
+    font-size: 20px;
+}
+
+.tableWrapper {
+    overflow-x: scroll;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+}
+
+
+
+.table {
+    width: 100%;
+    min-width: 1000px;
+    /* border-collapse: collapse; */
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.table th {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+}
+
+.table td {
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    text-align: center;
+}
+
+.table tr {
+    height: 70px;
+    transition: 0.6s;
+}
+
+.table tr:hover {
+    background-color: var(--main-color);
+}
+
+.icon_edit,
+.icon_delete {
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.icon_edit {
+    color: #15a170;
+}
+
+.icon_delete {
+    color: #e51247;
+}
+
+.icon_delete:hover,
+.icon_edit:hover {
+    color: var(--secondary-color);
+}
+
+
+@media (max-width: 768px) {
+    .tableWrapper {
+        overflow-x: auto;
+    }
+
+    .table {
+        min-width: 800px;
+    }
+}

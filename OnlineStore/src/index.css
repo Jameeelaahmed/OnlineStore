@@ -1,0 +1,23 @@
+input:focus,
+textarea:focus {
+    outline: none;
+}
+
+body {
+    outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--main-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+}

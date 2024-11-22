@@ -1,0 +1,81 @@
+.modal {
+    background-color: var(--secondary-color);
+    animation: fade-slide-in-ltr 0.3s ease-in-out;
+    /* Default animation for LTR */
+    color: var(--main-color);
+    outline: none;
+    border: none;
+    padding: 1%;
+    border-radius: 15px;
+    position: fixed;
+    margin: auto 0;
+    /* Center vertically */
+    width: 350px;
+}
+
+/* LTR-specific positioning and animation */
+[dir="ltr"] .modal {
+    right: 10px;
+    /* Align to the far-right */
+    left: auto;
+    /* Override any left positioning */
+    animation: fade-slide-in-ltr 0.3s ease-in-out;
+}
+
+/* RTL-specific positioning and animation */
+[dir="rtl"] .modal {
+    left: 10px;
+    /* Align to the far-left */
+    right: auto;
+    /* Override any right positioning */
+    animation: fade-slide-in-rtl 0.3s ease-in-out;
+}
+
+/* Backdrop for the modal */
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+/* Animation for LTR: Slide in from the right */
+@keyframes fade-slide-in-ltr {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+        /* Start off-screen to the right */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        /* Final position */
+    }
+}
+
+/* Animation for RTL: Slide in from the left */
+@keyframes fade-slide-in-rtl {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+        /* Start off-screen to the left */
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+        /* Final position */
+    }
+}
+
+.order_details {
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--main-color);
+}
+
+.order_details p:first-child {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.order_details p:last-child {
+    font-size: 14px;
+}
