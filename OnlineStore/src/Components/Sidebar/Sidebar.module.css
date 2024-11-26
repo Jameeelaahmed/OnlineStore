@@ -33,15 +33,44 @@
     position: fixed;
     z-index: 1000000000;
     height: 100vh;
-    transform: translateX(-350px);
-    transition: all 0.5s ease !important;
-    /* Added 's' for seconds */
+    transition: left 0.5s ease, right 0.5s ease;
+    /* Transition on left/right for smooth effect */
     overflow-y: scroll;
 }
 
+/* For LTR, the sidebar will start from the left off-screen */
+.sidebar.ltr {
+    left: -350px;
+    /* Off-screen to the left */
+}
+
+/* For RTL, the sidebar will start from the right off-screen */
+.sidebar.rtl {
+    right: -350px;
+    /* Off-screen to the right */
+}
+
+/* When the sidebar is active, it slides into view */
 .sidebar_active {
+    left: 0 !important;
+    /* Fully visible when active */
+    right: 0 !important;
+    /* Fully visible when active */
+}
+
+
+/* 
+.sidebar.sidebar_active {
     transform: translateX(0);
 }
+
+.sidebar.sidebar_active.ltr {
+    transform: translateX(0);
+}
+
+.sidebar.sidebar_active.rtl {
+    transform: translateX(0);
+} */
 
 .sidebar_active a {
     text-decoration: none;

@@ -15,6 +15,17 @@ export default function Sidebar({ opened, closed }) {
     const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
     const [isOrderDropdownOpen, setIsOrderDropdownOpen] = useState(false);
 
+    const [isRtl, setIsRtl] = useState(false);
+    console.log(isRtl)
+    console.log(document.documentElement.dir)
+
+    // Assume we fetch the language or direction
+    useEffect(() => {
+        const direction = document.documentElement.dir; // or get it from a config/state
+
+        setIsRtl(direction === 'rtl');
+    }, [document.documentElement.dir]); // Run once on mount
+
     // Reset the text animation when the sidebar is opened
     useEffect(() => {
         if (opened) {
@@ -55,127 +66,125 @@ export default function Sidebar({ opened, closed }) {
     return (
         <>
             {opened && <div className={classes.backdrop} onClick={handleClose}></div>}
-            {opened &&
-                <div className={`${classes.sidebar} ${opened ? classes.sidebar_active : classes.close}`}>
-                    <p className={classes.arrow_container} onClick={closed}>
-                        <FaIcon.FaX className={classes.close} />
-                    </p>
-                    <div className={classes.profile}>
-                        <p className={classes.user}>{currentText}</p>
-                    </div>
-                    <ul>
+
+            <div className={`${classes.sidebar} ${opened ? classes.sidebar_active : classes.close} ${isRtl ? classes.rtl : classes.ltr}`}>
+                <p className={classes.arrow_container} onClick={closed}>
+                    <FaIcon.FaX className={classes.close} />
+                </p>
+                <div className={classes.profile}>
+                    <p className={classes.user}>{currentText}</p>
+                </div>
+                <ul>
+                    <NavLink
+                        className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
+                        to="/dashboard"
+                        onClick={closed}
+                    >
+                        <li>
+                            <FaIcon.FaHouse className={classes.icon} />
+                            <p>{t('Dashboard')}</p>
+                        </li>
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ""}`}
+                        to="category"
+                        onClick={closed}
+                    >
+                        <li>
+                            <FaIcon.FaList className={classes.icon} />
+                            <p>{t("Categories List")}</p>
+                        </li>
+                    </NavLink>
+                    <li className={classes.dropdown_cont} onClick={toggleProductDropdown}>
+                        <div className={classes.cont}>
+                            <CgListTree className={classes.icon} />
+                            <p>{t("Products")}</p>
+                        </div>
+                        <div>
+                            <FaIcon.FaAngleDown className={classes.dropdownIcon} />
+                        </div>
+                    </li>
+                    {/* Dropdown List */}
+                    <ul
+                        className={`${classes.dropdown} ${isProductDropdownOpen ? classes.dropdownOpen : ""
+                            }`}
+                    >
                         <NavLink
-                            className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
-                            to="/dashboard"
+                            className={({ isActive }) =>
+                                `${classes.link} ${classes.dropdown_link} ${isActive ? classes.active : ""}`
+                            }
+                            to="/products"
                             onClick={closed}
                         >
                             <li>
-                                <FaIcon.FaHouse className={classes.icon} />
-                                <p>{t('Dashboard')}</p>
+                                <CgShapeRhombus className={classes.small_icon} />
+                                <p>{t("Products List")}</p>
                             </li>
                         </NavLink>
                         <NavLink
                             className={({ isActive }) =>
                                 `${classes.link} ${isActive ? classes.active : ""}`
                             }
-                            to="category"
+                            to="/AddProduct"
                             onClick={closed}
                         >
                             <li>
-                                <FaIcon.FaList className={classes.icon} />
-                                <p>{t("Categories List")}</p>
-                            </li>
-                        </NavLink>
-                        <li className={classes.dropdown_cont} onClick={toggleProductDropdown}>
-                            <div className={classes.cont}>
-                                <CgListTree className={classes.icon} />
-                                <p>{t("Products")}</p>
-                            </div>
-                            <div>
-                                <FaIcon.FaAngleDown className={classes.dropdownIcon} />
-                            </div>
-                        </li>
-                        {/* Dropdown List */}
-                        <ul
-                            className={`${classes.dropdown} ${isProductDropdownOpen ? classes.dropdownOpen : ""
-                                }`}
-                        >
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${classes.dropdown_link} ${isActive ? classes.active : ""}`
-                                }
-                                to="/products"
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Products List")}</p>
-                                </li>
-                            </NavLink>
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${isActive ? classes.active : ""}`
-                                }
-                                to="/AddProduct"
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Add Product")}</p>
-                                </li>
-                            </NavLink>
-                        </ul>
-                        <li className={classes.dropdown_cont} onClick={toggleOrderDropdown}>
-                            <div className={classes.cont}>
-                                <CgListTree className={classes.icon} />
-                                <p>{t("Orders")}</p>
-                            </div>
-                            <div>
-                                <FaIcon.FaAngleDown className={classes.dropdownIcon} />
-                            </div>
-                        </li>
-                        {/* Dropdown List */}
-                        <ul
-                            className={`${classes.dropdown} ${isOrderDropdownOpen ? classes.dropdownOpen : ""
-                                }`}
-                        >
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${classes.dropdown_link} ${isActive ? classes.active : ""}`
-                                }
-                                to="/orders"
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Orders List")}</p>
-                                </li>
-                            </NavLink>
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${isActive ? classes.active : ""}`
-                                }
-                                to="/make-order"
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Create Order")}</p>
-                                </li>
-                            </NavLink>
-                        </ul>
-                        <NavLink
-                            className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
-                            to="/users"
-                            onClick={closed}
-                        >
-                            <li>
-                                <FaIcon.FaUser className={classes.icon} />
-                                <p>{t('Users')}</p>
+                                <CgShapeRhombus className={classes.small_icon} />
+                                <p>{t("Add Product")}</p>
                             </li>
                         </NavLink>
                     </ul>
-                </div>}
+                    <li className={classes.dropdown_cont} onClick={toggleOrderDropdown}>
+                        <div className={classes.cont}>
+                            <CgListTree className={classes.icon} />
+                            <p>{t("Orders")}</p>
+                        </div>
+                        <div>
+                            <FaIcon.FaAngleDown className={classes.dropdownIcon} />
+                        </div>
+                    </li>
+                    {/* Dropdown List */}
+                    <ul
+                        className={`${classes.dropdown} ${isOrderDropdownOpen ? classes.dropdownOpen : ""
+                            }`}
+                    >
+                        <NavLink
+                            className={({ isActive }) =>
+                                `${classes.link} ${classes.dropdown_link} ${isActive ? classes.active : ""}`
+                            }
+                            to="/orders"
+                            onClick={closed}
+                        >
+                            <li>
+                                <CgShapeRhombus className={classes.small_icon} />
+                                <p>{t("Orders List")}</p>
+                            </li>
+                        </NavLink>
+                        <NavLink
+                            className={({ isActive }) =>
+                                `${classes.link} ${isActive ? classes.active : ""}`
+                            }
+                            to="/make-order"
+                            onClick={closed}
+                        >
+                            <li>
+                                <CgShapeRhombus className={classes.small_icon} />
+                                <p>{t("Create Order")}</p>
+                            </li>
+                        </NavLink>
+                    </ul>
+                    <NavLink
+                        className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
+                        to="/users"
+                        onClick={closed}
+                    >
+                        <li>
+                            <FaIcon.FaUser className={classes.icon} />
+                            <p>{t('Users')}</p>
+                        </li>
+                    </NavLink>
+                </ul>
+            </div>
         </>
     );
 }
