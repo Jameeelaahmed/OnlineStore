@@ -1,0 +1,31 @@
+.categorylist {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.category {
+    margin-top: 15px;
+}
+
+.add_category {
+    margin: 10px 0;
+}
+
+.add {
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.icon {
+    font-size: 20px;
+    margin: 0 10px;
+}

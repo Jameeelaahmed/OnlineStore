@@ -60,3 +60,44 @@
     margin-top: 10px;
     letter-spacing: 1px;
 }
+
+.title {
+    text-align: center;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.icon {
+    font-size: 24px;
+    color: var(--secondary-color);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.action_dropdown {
+    background-color: var(--secondary-color);
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    opacity: 0;
+    transition: 0.4s;
+    color: white;
+}
+
+.action_dropdown p {
+    margin: 10px 0;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.action_dropdown p:hover {
+    margin-right: 10px;
+}
+
+.show {
+    opacity: 1;
+}

@@ -34,6 +34,10 @@ export default function Orders() {
                     <p>{t("Cancelled")}</p>
                 </div>
             </div>
+            {/* <div className={classes.search}>
+                <input type="text" placeholder={t("Search")} />
+                <FaIcons.FaMagnifyingGlass className={classes.search_icon} />
+            </div> */}
             <div className={classes.tableWrapper}>
                 <table className={classes.table}>
                     <thead>
@@ -61,7 +65,7 @@ export default function Orders() {
                                     <td>
                                         {order.order[0]?.item}
                                         {order.order.length > 1 && (
-                                            <CiCircleMore />
+                                            <CiCircleMore className={classes.circle_icon} />
                                         )}
                                     </td>
                                     <td>{order.order[0]?.quantity}</td>
@@ -73,7 +77,7 @@ export default function Orders() {
                                     <td dir="ltr">{order.deliveryAddress}</td>
                                     <td dir="ltr">{order.paymentMethod}</td>
                                     <td>
-                                        <FaIcons.FaPencil className={classes.icon_edit} />
+                                        <FaIcons.FaPenToSquare className={classes.icon_edit} />
                                         <FaIcons.FaTrash className={classes.icon_delete} />
                                     </td>
                                 </tr>
@@ -95,13 +99,13 @@ export default function Orders() {
 
                 <span onClick={() => setPages(pages < Math.ceil(orders.length / 10) ? pages + 1 : pages)} className={classes.arrow}><FaIcons.FaCaretLeft className={classes.icon} /></span>
             </div>}
-            {selectedOrder && (
+            {/* {selectedOrder && ( */}
                 <OrderDetailModal
                     ref={modalRef}
                     order={selectedOrder}
                     onClose={closeModal}
                 />
-            )}
+            {/* )} */}
         </div>
     );
 }

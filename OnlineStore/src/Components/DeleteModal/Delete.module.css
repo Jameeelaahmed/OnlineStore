@@ -1,0 +1,91 @@
+.modal {
+    margin: auto;
+    background-color: var(--secondary-color);
+    outline: none;
+    color: var(--main-color);
+    padding: 20px;
+    border-radius: 15px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 300px; */
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal:hover .icon {
+    animation: top-down 1s infinite;
+}
+
+.icon_container {
+    padding: 20px;
+}
+
+.icon {
+    font-size: 30px;
+    color: #ef4444;
+}
+
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.actions {
+    padding: 20px;
+    height: 100px;
+}
+
+.delete {
+    background-color: #ef4444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.4s;
+    outline: none;
+}
+
+.delete:hover {
+    background-color: var(--main-color);
+    border: 5px solid #ef4444;
+    color: var(--secondary-color);
+}
+
+.cancel {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: 0.4s;
+    outline: none;
+}
+
+.cancel:hover {
+    background-color: var(--main-color);
+}
+
+@keyframes top-down {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

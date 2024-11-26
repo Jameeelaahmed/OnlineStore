@@ -6,7 +6,6 @@ import img from '../../assets/avatar.jpg'
 import * as FaIcons from 'react-icons/fa6'
 export default function Header() {
     const [currentLang, setCurrentLang] = useState(i18n.language);
-    // const { t } = useTranslation();
     const handleLanguageChange = (lang) => {
         document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
         i18n.changeLanguage(lang).then(() => {
@@ -14,7 +13,6 @@ export default function Header() {
         }).catch((err) => console.error("Error changing language:", err));
     };
 
-    console.log(i18n.language);
     return (
         <div className={classes.header}>
             <div className={classes.logo}>

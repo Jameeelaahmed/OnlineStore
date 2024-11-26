@@ -14,10 +14,17 @@ export default function Sidebar({ opened, closed }) {
     const [activeIndex, setActiveIndex] = useState(0); // Track the active li
     const [isProductDropdownOpen, setIsProductDropdownOpen] = useState(false);
     const [isOrderDropdownOpen, setIsOrderDropdownOpen] = useState(false);
-    const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+
+    // Reset the text animation when the sidebar is opened
+    useEffect(() => {
+        if (opened) {
+            setCurrentText('');
+            setCurrentIndex(0);
+        }
+    }, [opened]);
 
     useEffect(() => {
-        if (currentIndex < text.length) {
+        if (currentIndex < text.length && opened) {
             const timeout = setTimeout(() => {
                 setCurrentText(prevText => prevText + text[currentIndex]);
                 setCurrentIndex(prevIndex => prevIndex + 1);
@@ -25,13 +32,12 @@ export default function Sidebar({ opened, closed }) {
 
             return () => clearTimeout(timeout);
         }
-    }, [currentIndex, text]);
+    }, [currentIndex, text, opened]);
 
     function handleClose() {
         closed();
         setIsProductDropdownOpen(false);
         setIsOrderDropdownOpen(false);
-        setIsCategoryDropdownOpen(false);
     }
 
     function handleActive(index) {
@@ -44,10 +50,6 @@ export default function Sidebar({ opened, closed }) {
 
     const toggleOrderDropdown = () => {
         setIsOrderDropdownOpen(!isOrderDropdownOpen);
-    };
-
-    const toggleCategoryDropdown = () => {
-        setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
     };
 
     return (
@@ -72,45 +74,18 @@ export default function Sidebar({ opened, closed }) {
                                 <p>{t('Dashboard')}</p>
                             </li>
                         </NavLink>
-                        <li className={classes.dropdown_cont} onClick={toggleCategoryDropdown}>
-                            <div className={classes.cont}>
-                                <CgListTree className={classes.icon} />
-                                <p>{t("Categories")}</p>
-                            </div>
-                            <div>
-                                <FaIcon.FaAngleDown className={classes.dropdownIcon} />
-                            </div>
-                        </li>
-                        {/* Dropdown List */}
-                        <ul
-                            className={`${classes.dropdown} ${isCategoryDropdownOpen ? classes.dropdownOpen : ""
-                                }`}
+                        <NavLink
+                            className={({ isActive }) =>
+                                `${classes.link} ${isActive ? classes.active : ""}`
+                            }
+                            to="category"
+                            onClick={closed}
                         >
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${classes.dropdown_link} ${isActive ? classes.active : ""}`
-                                }
-                                to=""
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Categories List")}</p>
-                                </li>
-                            </NavLink>
-                            <NavLink
-                                className={({ isActive }) =>
-                                    `${classes.link} ${isActive ? classes.active : ""}`
-                                }
-                                to=""
-                                onClick={closed}
-                            >
-                                <li>
-                                    <CgShapeRhombus className={classes.small_icon} />
-                                    <p>{t("Add Category")}</p>
-                                </li>
-                            </NavLink>
-                        </ul>
+                            <li>
+                                <FaIcon.FaList className={classes.icon} />
+                                <p>{t("Categories List")}</p>
+                            </li>
+                        </NavLink>
                         <li className={classes.dropdown_cont} onClick={toggleProductDropdown}>
                             <div className={classes.cont}>
                                 <CgListTree className={classes.icon} />
@@ -189,13 +164,16 @@ export default function Sidebar({ opened, closed }) {
                                 </li>
                             </NavLink>
                         </ul>
-                        <li
-                            className={`${classes.link} ${activeIndex === 5 ? classes.active : ''}`}
-                            onClick={() => handleActive(5)}
+                        <NavLink
+                            className={({ isActive }) => `${classes.link} ${isActive ? classes.active : ''}`}
+                            to="/users"
+                            onClick={closed}
                         >
-                            <FaIcon.FaUser className={classes.icon} />
-                            <p>{t("Users")}</p>
-                        </li>
+                            <li>
+                                <FaIcon.FaUser className={classes.icon} />
+                                <p>{t('Users')}</p>
+                            </li>
+                        </NavLink>
                     </ul>
                 </div>}
         </>
